@@ -263,6 +263,7 @@ def drop_incomplete(ddict_in):
     return ddict_out
 
 def get_availability_from_ddicts(dict_of_ddicts):
+    '''compute how many models and members available in input dictionary'''
     all_models = np.unique(np.hstack([[ds.attrs['source_id'] for ds in dataset_dict.values()] for dataset_dict in dict_of_ddicts.values()]))
     availability = defaultdict(dict)
     
