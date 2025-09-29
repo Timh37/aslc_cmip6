@@ -1,7 +1,7 @@
-from scipy.stats import circmean
 import xarray as xr
 import numpy as np
-import pandas as pd
+
+#several functionalities used in the analysis scripts
 
 def count_available_simulations(ds,var):
     #provides an overview of the available models and members in the ensemble contained in ds
@@ -33,7 +33,7 @@ def compute_circ_mean(da,dim):
     atan = np.arctan2(sin_angles.mean(dim=dim),cos_angles.mean(dim=dim))
     atan = xr.where(atan<0,atan+2*np.pi,atan) #return between 0 and 2pi
 
-    #IMPORTANT!!!: if input is evenly distributed (symmetrical), output is returned but the circular mean is actually undefined!
+    #IMPORTANT!!!: if input is evenly distributed (symmetrical), output is returned but the circular mean is actually undefined! only happens in edge cases in this application
     return atan/conv + .5 #convert back
 
 def compute_rmse(da_hat,da_obs,dims):
